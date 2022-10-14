@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerStatsScript : MonoBehaviour
+public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private float playerHealth = 100;
-    public int playerAmmo = 100;
+    [SerializeField] public float playerHealth = 100;
+    [SerializeField] public int playerAmmo = 100;
     [SerializeField] private float playerInfectionBar = 100;
     
     //PlayerHealthUI
@@ -30,10 +30,22 @@ public class PlayerStatsScript : MonoBehaviour
 
     public void PlayerDamaged(float damage)
     {
-        //Remove health
-        playerHealth -= damage;
-        
-        //Decrease health on players Hud
-        healthCountUI.text = (playerHealth).ToString();
+        if(playerHealth > damage)
+        {
+            //Remove health
+            playerHealth -= damage;
+            
+            //Decrease health on players Hud
+            healthCountUI.text = (playerHealth).ToString();
+        }
+        else if(playerHealth <= damage)
+        {
+            PlayerDeath();
+        }
+    }
+
+    void PlayerDeath()
+    {
+        Debug.Log("Player has died!");
     }
 }

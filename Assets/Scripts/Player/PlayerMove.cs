@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementScript : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     //PlayerMovement variables
     [SerializeField] private CharacterController playerController;
-    [SerializeField] private float playerMovementSpeed = 12;
+    [SerializeField] private float playerMovementSpeed = 4;
 
     //Gravity
     [SerializeField] private Vector3 playerVelocity;

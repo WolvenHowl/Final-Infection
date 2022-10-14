@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLookScript : MonoBehaviour
+public class PlayerLook : MonoBehaviour
 {
     //PlayerLook variables
     [SerializeField] private float playerLookSpeed = 200;

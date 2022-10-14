@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class WeaponScript : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     [SerializeField] private float weaponDamage = 10f;
     [SerializeField] private float weaponRange = 15f;
     [SerializeField] private Camera playerCamera;
 
     //PlayerAmmoUI
-    [SerializeField] private PlayerStatsScript statsPlayer;
+    [SerializeField] private PlayerStats statsPlayer;
     [SerializeField] private TMP_Text ammoCountUI;
 
     private void Start() 
     {
         playerCamera = gameObject.GetComponent<Camera>();
-        statsPlayer = transform.parent.GetComponent<PlayerStatsScript>();
+        statsPlayer = transform.parent.GetComponent<PlayerStats>();
 
         ammoCountUI = GameObject.Find("AmmoCount").GetComponent<TMP_Text>();
         ammoCountUI.text = (statsPlayer.playerAmmo).ToString();
@@ -42,7 +42,7 @@ public class WeaponScript : MonoBehaviour
             //Only if something is hit
             if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, weaponRange))
             {
-                EnemyStatsScript enemy = hit.transform.GetComponent<EnemyStatsScript>();
+                EnemyAI enemy = hit.transform.GetComponent<EnemyAI>();
                 if(enemy != null)
                 {
                     enemy.TakeDamage(weaponDamage);
