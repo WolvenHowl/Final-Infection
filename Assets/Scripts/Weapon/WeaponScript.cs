@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WeaponScript : MonoBehaviour
 {
@@ -8,9 +9,17 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private float weaponRange = 15f;
     [SerializeField] private Camera playerCamera;
 
+    //PlayerAmmoUI
+    [SerializeField] private PlayerStatsScript statsPlayer;
+    [SerializeField] private TMP_Text ammoCountUI;
+
     private void Start() 
     {
         playerCamera = gameObject.GetComponent<Camera>();
+        statsPlayer = transform.parent.GetComponent<PlayerStatsScript>();
+
+        ammoCountUI = GameObject.Find("AmmoCount").GetComponent<TMP_Text>();
+        ammoCountUI.text = (statsPlayer.playerAmmo).ToString();
     }
 
     private void Update() 
@@ -23,14 +32,21 @@ public class WeaponScript : MonoBehaviour
 
     void Shoot()
     {
-        RaycastHit hit;
-        //Only if something is hit
-        if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, weaponRange))
+        if(statsPlayer.playerAmmo > 0)
         {
-            EnemyScript enemy = hit.transform.GetComponent<EnemyScript>();
-            if(enemy != null)
+            //Decrease ammo when player shoots
+            statsPlayer.playerAmmo -= 1;
+            ammoCountUI.text = (statsPlayer.playerAmmo).ToString();
+
+            RaycastHit hit;
+            //Only if something is hit
+            if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, weaponRange))
             {
-                enemy.TakeDamage(weaponDamage);
+                EnemyStatsScript enemy = hit.transform.GetComponent<EnemyStatsScript>();
+                if(enemy != null)
+                {
+                    enemy.TakeDamage(weaponDamage);
+                }
             }
         }
     }

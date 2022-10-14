@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyStatsScript : MonoBehaviour
 {
     [SerializeField] private float enemyHealth = 50f;
     [SerializeField] private float enemyDamage = 15f;
+    [SerializeField] private PlayerStatsScript statsPlayer;
 
     public void TakeDamage(float ammount)
     {
@@ -19,5 +20,11 @@ public class EnemyScript : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+    }
+
+    void Attack()
+    {
+        //OnPlayerHit
+        statsPlayer.PlayerDamaged(enemyDamage);
     }
 }
