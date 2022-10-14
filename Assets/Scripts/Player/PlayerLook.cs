@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     //PlayerLook variables
-    [SerializeField] private float playerLookSpeed = 200;
+    [SerializeField] private float playerLookSpeed = 400;
     [SerializeField] private float xRotation = 0f;
     [SerializeField] private Transform playerBody;
 
