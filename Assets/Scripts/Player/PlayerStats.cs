@@ -18,16 +18,6 @@ public class PlayerStats : MonoBehaviour
         healthCountUI.text = (playerHealth).ToString();
     }
 
-    private void Update()
-    {
-        //TEMP trigger health damage event
-        if(Input.GetButtonDown("Fire2"))
-        {
-            PlayerDamaged(10);
-            Debug.Log("Player took 10 damage!");
-        }
-    }
-
     public void PlayerDamaged(float damage)
     {
         if(playerHealth > damage)
