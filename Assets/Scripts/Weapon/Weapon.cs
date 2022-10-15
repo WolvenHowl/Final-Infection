@@ -5,7 +5,7 @@ using TMPro;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private float weaponDamage = 10f;
+    [SerializeField] private int weaponDamage = 10;
     [SerializeField] private float weaponRange = 15f;
     [SerializeField] private Camera playerCamera;
 
