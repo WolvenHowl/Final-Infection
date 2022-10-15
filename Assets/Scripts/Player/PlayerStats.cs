@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class PlayerStats : MonoBehaviour
 
     public delegate void syringeUsed();
     public static event syringeUsed onSyringeUsed;
-    
 
     private void Start() 
     {
@@ -47,15 +47,14 @@ public class PlayerStats : MonoBehaviour
 
     void PlayerDeath()
     {
-        Debug.Log("Player has died!");
+        SceneManager.LoadScene(sceneBuildIndex: 2);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.layer == 7)
         {
-            Debug.Log("YES");
-
             playerInfectionLevel += 5;
 
             //Decrease health on players Hud
