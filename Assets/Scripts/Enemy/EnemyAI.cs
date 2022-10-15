@@ -116,7 +116,7 @@ public class EnemyAI : MonoBehaviour
         if(enemyHealth <= 0f)
         {
             gameObject.GetComponent<NavMeshAgent>().speed = 0f;
-            gameObject.GetComponent<MeshCollider>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             if(enemyAnimator != null)
             {
                 if(!isDead)
