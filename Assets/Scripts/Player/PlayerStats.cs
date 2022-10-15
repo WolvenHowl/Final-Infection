@@ -5,20 +5,20 @@ using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] public int playerMaxHealth = 100;
-    [SerializeField] public int playerHealth = 100;
+    [SerializeField] public float playerHealth = 100;
     [SerializeField] public int playerAmmo = 100;
     [SerializeField] private float playerInfectionBar = 100;
-
-    public HealthBar healthBar;
+    
+    //PlayerHealthUI
+    [SerializeField] private TMP_Text healthCountUI;
 
     private void Start() 
     {
-        healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
-        healthBar.SetMaxHealth(playerMaxHealth);
+        healthCountUI = GameObject.Find("HealthCount").GetComponent<TMP_Text>();
+        healthCountUI.text = (playerHealth).ToString();
     }
 
-    public void PlayerDamaged(int damage)
+    public void PlayerDamaged(float damage)
     {
         if(playerHealth > damage)
         {
@@ -26,7 +26,7 @@ public class PlayerStats : MonoBehaviour
             playerHealth -= damage;
             
             //Decrease health on players Hud
-            healthBar.SetHealth(playerHealth);
+            healthCountUI.text = (playerHealth).ToString();
         }
         else if(playerHealth <= damage)
         {

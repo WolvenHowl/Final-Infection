@@ -5,17 +5,13 @@ using TMPro;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private int weaponDamage = 10;
+    [SerializeField] private float weaponDamage = 10f;
     [SerializeField] private float weaponRange = 15f;
     [SerializeField] private Camera playerCamera;
 
     //PlayerAmmoUI
     [SerializeField] private PlayerStats statsPlayer;
     [SerializeField] private TMP_Text ammoCountUI;
-    
-    //Recoil Animation
-    [SerializeField] private Animator recoilAnimator;
-    private bool didShoot = false;
 
     private void Start() 
     {
@@ -24,9 +20,6 @@ public class Weapon : MonoBehaviour
 
         ammoCountUI = GameObject.Find("AmmoCount").GetComponent<TMP_Text>();
         ammoCountUI.text = (statsPlayer.playerAmmo).ToString();
-
-        //Recoil
-        recoilAnimator = gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Update() 
@@ -41,17 +34,6 @@ public class Weapon : MonoBehaviour
     {
         if(statsPlayer.playerAmmo > 0)
         {
-            if(recoilAnimator != null)
-            {
-                if(!didShoot)
-                {
-                    CancelInvoke(nameof(AttackAfter1Sec));
-                    recoilAnimator.SetTrigger("onShoot");
-                    didShoot = true;
-                    Invoke(nameof(resetRecoilAfterAttack), 3f);
-                }
-            }
-
             //Decrease ammo when player shoots
             statsPlayer.playerAmmo -= 1;
             ammoCountUI.text = (statsPlayer.playerAmmo).ToString();
@@ -69,11 +51,5 @@ public class Weapon : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void resetRecoilAfterAttack()
-    {
-        recoilAnimator.ResetTrigger("onShoot");
-        didShoot = false;
     }
 }
