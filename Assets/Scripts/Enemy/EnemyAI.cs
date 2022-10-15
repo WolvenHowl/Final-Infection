@@ -20,8 +20,8 @@ public class EnemyAI : MonoBehaviour
     public float attackRange = 1.25f;
     public bool playerInSightRange, playerInAttackRange;
     
-    [SerializeField] private float enemyHealth = 50f;
-    [SerializeField] private float enemyDamage = 15f;
+    [SerializeField] private int enemyHealth = 50;
+    [SerializeField] private int enemyDamage = 15;
     [SerializeField] private PlayerStats statsPlayer;
 
     [SerializeField] private Animator enemyAnimator;
@@ -34,7 +34,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.Find("Player").transform;
         statsPlayer = player.GetComponent<PlayerStats>();
         agent = GetComponent<NavMeshAgent>();
-        enemyAnimator = gameObject.transform.GetChild(0).GetComponent<Animator>();
+        enemyAnimator = gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -81,6 +81,7 @@ public class EnemyAI : MonoBehaviour
     {
         transform.LookAt(player);
         agent.SetDestination(player.position);
+        CancelInvoke(nameof(AttackAfter1Sec));
     }
 
     private void AttackPlayer()
@@ -109,13 +110,13 @@ public class EnemyAI : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(float ammount)
+    public void TakeDamage(int ammount)
     {
         enemyHealth -= ammount;
         if(enemyHealth <= 0f)
         {
             gameObject.GetComponent<NavMeshAgent>().speed = 0f;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<MeshCollider>().enabled = false;
             if(enemyAnimator != null)
             {
                 if(!isDead)
