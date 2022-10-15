@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private PlayerStats statsPlayer;
     [SerializeField] private TMP_Text ammoCountUI;
 
+    public AudioSource playSoundOnShoot;
+
     private void Start() 
     {
         playerCamera = gameObject.GetComponent<Camera>();
@@ -28,12 +30,14 @@ public class Weapon : MonoBehaviour
         {
             Shoot();
         }
+        ammoCountUI.text = (statsPlayer.playerAmmo).ToString();
     }
 
     void Shoot()
     {
         if(statsPlayer.playerAmmo > 0)
         {
+            playSoundOnShoot.Play();
             //Decrease ammo when player shoots
             statsPlayer.playerAmmo -= 1;
             ammoCountUI.text = (statsPlayer.playerAmmo).ToString();

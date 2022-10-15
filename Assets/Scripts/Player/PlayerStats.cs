@@ -55,10 +55,12 @@ public class PlayerStats : MonoBehaviour
     {
         if(other.gameObject.layer == 7)
         {
-            playerInfectionLevel += 5;
+            playerInfectionLevel += 10;
+            playerHealth += 10;
 
             //Decrease health on players Hud
             infecBar.SetSlider(playerInfectionLevel);
+            healthBar.SetHealth(playerHealth);
 
             if(onSyringeUsed != null)
             {
@@ -76,5 +78,10 @@ public class PlayerStats : MonoBehaviour
 
         //Decrease health on players Hud
         infecBar.SetSlider(playerInfectionLevel);
+
+        if(playerInfectionLevel <= 0)
+        {
+            PlayerDeath();
+        }
     }
 }

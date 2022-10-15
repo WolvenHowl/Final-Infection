@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEditor.Animations;
 using System.Collections;
 
 public class EnemyAI : MonoBehaviour
@@ -120,6 +119,7 @@ public class EnemyAI : MonoBehaviour
         {
             gameObject.GetComponent<NavMeshAgent>().speed = 0f;
             gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<AudioSource>().enabled = false;
             if(enemyAnimator != null)
             {
                 if(!isDead)
@@ -141,6 +141,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void DestroyCorpseAfter10Seconds()
     {
+        statsPlayer.playerAmmo += 10;
         Destroy(gameObject);
     }
 }
