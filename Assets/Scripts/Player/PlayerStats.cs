@@ -2,23 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] public float playerHealth = 100;
+    [SerializeField] public int playerMaxHealth = 100;
+    [SerializeField] public int playerHealth = 100;
     [SerializeField] public int playerAmmo = 100;
-    [SerializeField] private float playerInfectionBar = 100;
-    
-    //PlayerHealthUI
-    [SerializeField] private TMP_Text healthCountUI;
+    [SerializeField] public int playerMaxInfectionLevel = 100;
+    [SerializeField] public int playerInfectionLevel = 75;
+
+    public HealthBar healthBar;
+    public InfectionBar infecBar;
+
+    public delegate void syringeUsed();
+    public static event syringeUsed onSyringeUsed;
 
     private void Start() 
     {
-        healthCountUI = GameObject.Find("HealthCount").GetComponent<TMP_Text>();
-        healthCountUI.text = (playerHealth).ToString();
+        healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        healthBar.SetMaxHealth(playerMaxHealth);
+        
+        infecBar = GameObject.Find("InfectionBar").GetComponent<InfectionBar>();
+        infecBar.SetMaxSlider(playerMaxInfectionLevel);
+
+        InvokeRepeating("DecreaseInfection", 1f, 1f);
     }
 
-    public void PlayerDamaged(float damage)
+    public void PlayerDamaged(int damage)
     {
         if(playerHealth > damage)
         {
@@ -26,7 +37,7 @@ public class PlayerStats : MonoBehaviour
             playerHealth -= damage;
             
             //Decrease health on players Hud
-            healthCountUI.text = (playerHealth).ToString();
+            healthBar.SetHealth(playerHealth);
         }
         else if(playerHealth <= damage)
         {
@@ -36,6 +47,41 @@ public class PlayerStats : MonoBehaviour
 
     void PlayerDeath()
     {
-        Debug.Log("Player has died!");
+        SceneManager.LoadScene(sceneBuildIndex: 2);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.gameObject.layer == 7)
+        {
+            playerInfectionLevel += 10;
+            playerHealth += 10;
+
+            //Decrease health on players Hud
+            infecBar.SetSlider(playerInfectionLevel);
+            healthBar.SetHealth(playerHealth);
+
+            if(onSyringeUsed != null)
+            {
+                 onSyringeUsed();
+            }
+
+            Destroy(other.gameObject);
+        }
+    }
+
+    void DecreaseInfection()
+    {
+        Debug.Log("ran");
+        playerInfectionLevel -= 1;
+
+        //Decrease health on players Hud
+        infecBar.SetSlider(playerInfectionLevel);
+
+        if(playerInfectionLevel <= 0)
+        {
+            PlayerDeath();
+        }
     }
 }
