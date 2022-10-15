@@ -31,8 +31,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1170819300222146885}
+  m_Children: []
   m_Father: {fileID: 5396490343733239689}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59,7 +58,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -147,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 5396490343733239687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5396490343328601900}
@@ -188,6 +187,7 @@ MonoBehaviour:
   playerMovementSpeed: 4
   playerVelocity: {x: 0, y: -2, z: 0}
   playerGravity: -9.81
+  playerJumpHeight: 3
 --- !u!114 &5396490343733239690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,69 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f11e5b4730bbaf47afaec7b905869e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMaxHealth: 100
   playerHealth: 100
   playerAmmo: 100
   playerInfectionBar: 100
-  healthCountUI: {fileID: 0}
---- !u!1001 &1170819300222534597
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5396490343328601900}
-    m_Modifications:
-    - target: {fileID: 100000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_Name
-      value: UMP-45
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.417
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.566
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.461
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99108607
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.08316629
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.103321835
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.012506704
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -9.639
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -11.866
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.442
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
---- !u!4 &1170819300222146885 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 5112e6444b23577429168ceb76476ae4, type: 3}
-  m_PrefabInstance: {fileID: 1170819300222534597}
-  m_PrefabAsset: {fileID: 0}
+  healthBar: {fileID: 0}
