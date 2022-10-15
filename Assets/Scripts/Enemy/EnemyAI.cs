@@ -29,6 +29,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private bool isAttacking;
     [SerializeField] private bool isDead;
 
+    public delegate void EnemyKilled();
+    public static event EnemyKilled OnEnemyKilled;
+
     private void Start()
     {
         player = GameObject.Find("Player").transform;
@@ -126,6 +129,11 @@ public class EnemyAI : MonoBehaviour
                     isAttacking = false;
                     isWalking = false;
                     isDead = true;
+                    
+                    if(OnEnemyKilled != null)
+                    {
+                        OnEnemyKilled();
+                    }
                     Invoke(nameof(DestroyCorpseAfter10Seconds), 10f);
                 }
             }
