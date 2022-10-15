@@ -5,7 +5,7 @@ using TMPro;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private float weaponDamage = 10f;
+    [SerializeField] private int weaponDamage = 10;
     [SerializeField] private float weaponRange = 15f;
     [SerializeField] private Camera playerCamera;
 
@@ -42,13 +42,12 @@ public class Weapon : MonoBehaviour
             //Only if something is hit
             if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, weaponRange))
             {
-                
-                Debug.Log(hit.transform.name);
                 EnemyAI enemy = hit.transform.GetComponent<EnemyAI>();
                 if(enemy != null)
                 {
                     enemy.TakeDamage(weaponDamage);
                 }
+                Debug.Log(hit.transform.name);
             }
         }
     }

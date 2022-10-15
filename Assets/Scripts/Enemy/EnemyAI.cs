@@ -20,8 +20,8 @@ public class EnemyAI : MonoBehaviour
     public float attackRange = 1.25f;
     public bool playerInSightRange, playerInAttackRange;
     
-    [SerializeField] private float enemyHealth = 50f;
-    [SerializeField] private float enemyDamage = 15f;
+    [SerializeField] private int enemyHealth = 50;
+    [SerializeField] private int enemyDamage = 15;
     [SerializeField] private PlayerStats statsPlayer;
 
     [SerializeField] private Animator enemyAnimator;
@@ -34,7 +34,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.Find("Player").transform;
         statsPlayer = player.GetComponent<PlayerStats>();
         agent = GetComponent<NavMeshAgent>();
-        enemyAnimator = gameObject.transform.GetChild(0).GetComponent<Animator>();
+        enemyAnimator = gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -94,7 +94,7 @@ public class EnemyAI : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Invoke(nameof(AttackAfter1Sec), 1f);
+            Invoke(nameof(AttackAfter1Sec), 2f);
             ///End of attack code
 
             alreadyAttacked = true;
@@ -110,7 +110,7 @@ public class EnemyAI : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(float ammount)
+    public void TakeDamage(int ammount)
     {
         enemyHealth -= ammount;
         if(enemyHealth <= 0f)

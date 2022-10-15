@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float playerGravity = -9.81f;
 
     //Jump
-    //[SerializeField] private float playerJumpHeight = 3f;
+    [SerializeField] private float playerJumpHeight = 3f;
 
 
     void Start()
@@ -41,9 +41,9 @@ public class PlayerMove : MonoBehaviour
         }
 
         //Jump
-        //if(Input.GetButtonDown("Jump") && playerController.isGrounded)
-        //{
-        //    playerVelocity.y  = Mathf.Sqrt(playerJumpHeight -2f * playerGravity);
-        //}
+        if(Input.GetButtonDown("Jump") && playerController.isGrounded)
+        {
+            playerVelocity.y  = Mathf.Sqrt(playerJumpHeight -2f * playerGravity);
+        }
     }
 }
