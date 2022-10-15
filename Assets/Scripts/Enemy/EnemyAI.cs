@@ -81,6 +81,7 @@ public class EnemyAI : MonoBehaviour
     {
         transform.LookAt(player);
         agent.SetDestination(player.position);
+        CancelInvoke(nameof(AttackAfter1Sec));
     }
 
     private void AttackPlayer()
