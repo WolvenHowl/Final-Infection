@@ -42,6 +42,8 @@ public class Weapon : MonoBehaviour
             //Only if something is hit
             if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, weaponRange))
             {
+                
+                Debug.Log(hit.transform.name);
                 EnemyAI enemy = hit.transform.GetComponent<EnemyAI>();
                 if(enemy != null)
                 {
