@@ -332,4 +332,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701186f42632b11439688ee2656d7055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  Healthslider: {fileID: 0}
